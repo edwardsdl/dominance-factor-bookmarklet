@@ -4,9 +4,9 @@
          element.type = "text/javascript";
          element.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js";
          element.onload = callback;
-         document.body.appendChild(element)
+         document.body.appendChild(element);
      } else {
-         callback()
+         callback();
      }
  })(function () {
      var i = 0;
@@ -23,11 +23,11 @@
          i++;
          averageDominanceFactor = Math.round(totalDominanceFactor / i, -1);
          if (lowestDominanceFactor == 0 || lowestDominanceFactor > dominanceFactor) {
-             lowestDominanceFactor = dominanceFactor
+             lowestDominanceFactor = dominanceFactor;
          }
          if (highestDominanceFactor == 0 || highestDominanceFactor < dominanceFactor) {
-             highestDominanceFactor = dominanceFactor
+             highestDominanceFactor = dominanceFactor;
          }
      });
-     alert("Score: " + totalDominanceFactor + "<br/>Average: " + averageDominanceFactor + "<br/>Lowest: " + lowestDominanceFactor + "<br/>Highest: " + highestDominanceFactor)
+     alert("Score: " + totalDominanceFactor + "<br/>Average: " + averageDominanceFactor + "<br/>Lowest: " + lowestDominanceFactor + "<br/>Highest: " + highestDominanceFactor);
  });
