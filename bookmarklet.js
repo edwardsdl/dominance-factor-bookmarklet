@@ -36,7 +36,7 @@ javascript: (function (callback) {
 	var rankedBestCharacterAverageDominanceFactor = 0;
 	var rankedWorstCharacter = '';
 	var rankedWorstCharacterAverageDominanceFactor = 0;
-	// Loop through for each character
+	/* Loop through for each character */
 	$('#ranked_stats tbody tr').each(function () {
 		var character = $(this).find("td").eq(0).attr('data-sortval');
 		var wins = $(this).find("td").eq(1).html();
