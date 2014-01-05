@@ -76,17 +76,17 @@ javascript: (function (callback) {
 		'<div class="tabs2_container pane" style="text-align:left;">' + 
 			'<div id="RecentGames" class="StatsPage" style="padding-left:10px; padding-bottom:3px;">' + 
 				"Games: " + $matches.length + "<br/>" +
-				"Score: " + totalDominanceFactor + "<br/>" +
-				"Average: " + Math.round(averageDominanceFactor*100)/100 + "<br/>" +
-				"Lowest: " + lowestDominanceFactor + "<br/>" +
-				"Highest: " + highestDominanceFactor + "<br/>" +
+				"Score: " + totalDominanceFactor.toFixed(0) + "<br/>" +
+				"Average: " + averageDominanceFactor.toFixed(0) + "<br/>" +
+				"Lowest: " + lowestDominanceFactor.toFixed(0) + "<br/>" +
+				"Highest: " + highestDominanceFactor.toFixed(0) + "<br/>" +
 			'</div>' +
 			'<div id="RankedGames" class="StatsPage" style="display: none; padding-left:10px; padding-bottom:3px;">' +
 				"Ranked Games: " + totalRankedMatches + "<br/>" +
-				"Ranked Score: " + rankedTotalDominanceFactor + "<br/>" +
-				"Ranked Average: " + Math.round(rankedAverageDominanceFactor*100)/100 + "<br/>" +
-				"Ranked Best: " + rankedBestCharacter + " (" + rankedBestCharacterAverageDominanceFactor + ")<br/>" +
-				"Ranked Worst: " + rankedWorstCharacter + " (" + rankedWorstCharacterAverageDominanceFactor + ")<br/>" +
+				"Ranked Score: " + rankedTotalDominanceFactor.toFixed(0) + "<br/>" +
+				"Ranked Average: " + rankedAverageDominanceFactor.toFixed(0) + "<br/>" +
+				"Ranked Best: " + rankedBestCharacter + " (" + rankedBestCharacterAverageDominanceFactor.toFixed(0) + ")<br/>" +
+				"Ranked Worst: " + rankedWorstCharacter + " (" + rankedWorstCharacterAverageDominanceFactor.toFixed(0) + ")<br/>" +
 			'</div>' +
 		'</div>'
 		);
