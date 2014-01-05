@@ -9,6 +9,9 @@ javascript: (function (callback) {
 		callback();
 	}
 })(function () {
+	if(window.location.hostname.toLowerCase().indexOf('lolking.net') < 0)
+		return;
+
 	var i = 0;
 	var totalDominanceFactor = 0;
 	var averageDominanceFactor = 0;
@@ -63,7 +66,7 @@ javascript: (function (callback) {
 	 });
 	alert(
 		'<ul class="tabs2">' +
-			'<li style="margin-left: 0px;"><a href="#" id="ShowRecentGames" class="StatsTab selected">Recent</a></li>' +
+			'<li class="selected" style="margin-left: 0px;"><a href="#" id="ShowRecentGames" class="StatsTab">Recent</a></li>' +
 			'<li><a href="#" id="ShowRankedGames"class="StatsTab">Ranked</a></li>' +
 		'</ul>' +
 		'<div class="tabs2_container pane">' + 
