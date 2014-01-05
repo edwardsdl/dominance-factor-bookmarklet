@@ -12,19 +12,18 @@ javascript: (function (callback) {
 	if(window.location.hostname.toLowerCase().indexOf('lolking.net') < 0)
 		return;
 
-	var i = 0;
 	var totalDominanceFactor = 0;
 	var averageDominanceFactor = 0;
 	var lowestDominanceFactor = 0;
 	var highestDominanceFactor = 0;
-	$('.match_details:contains("5v5") .match_details_cell:contains("Kills") div').each(function () {
+	var $matches = $('.match_details:contains("5v5") .match_details_cell:contains("Kills") div');
+	
+	$matches.each(function () {
 		var kills = $(this).children("strong:eq(0)").text();
 		var deaths = $(this).children("strong:eq(1)").text();
 		var assists = $(this).children("strong:eq(2)").text();
 		var dominanceFactor = (kills * 2) - (deaths * 3) + (assists * 1);
 		totalDominanceFactor += dominanceFactor;
-		i++;
-		averageDominanceFactor = totalDominanceFactor / i;
 		if (lowestDominanceFactor == 0 || lowestDominanceFactor > dominanceFactor) {
 			lowestDominanceFactor = dominanceFactor;
 		}
@@ -32,7 +31,10 @@ javascript: (function (callback) {
 			highestDominanceFactor = dominanceFactor;
 		}
 	});
-	var totalRankedGames = 0;
+	
+	averageDominanceFactor = totalDominanceFactor / $matches.length;
+
+	var totalRankedMatches = 0;
 	var rankedTotalDominanceFactor = 0;
 	var rankedAverageDominanceFactor = 0;
 	var rankedBestCharacter = '';
@@ -45,14 +47,13 @@ javascript: (function (callback) {
 		var wins = $(this).find("td").eq(1).html();
 		var losses = $(this).find("td").eq(2).html();
 		var rankedGames = Number(wins) + Number(losses);
-		totalRankedGames += rankedGames;
 		var kills = parseFloat($(this).find("td").eq(5).html());
 		var deaths = parseFloat($(this).find("td").eq(6).html());
 		var assists = parseFloat($(this).find("td").eq(7).html());
 		var averageDominanceFactor = (kills * 2) - (deaths * 3) + (assists * 1);
 		var dominanceFactor = rankedBestCharacterAverageDominanceFactor * rankedGames;
 		rankedTotalDominanceFactor += dominanceFactor;
-		rankedAverageDominanceFactor = rankedTotalDominanceFactor / totalRankedGames;
+		totalRankedMatches += rankedGames;
 		if(rankedWorstCharacterAverageDominanceFactor == 0 || rankedWorstCharacterAverageDominanceFactor > averageDominanceFactor)
 		{
 			rankedWorstCharacter = character;
@@ -64,24 +65,28 @@ javascript: (function (callback) {
 			rankedBestCharacterAverageDominanceFactor = averageDominanceFactor;
 		}
 	 });
+	 
+	rankedAverageDominanceFactor = rankedTotalDominanceFactor / totalRankedMatches;
+
 	alert(
 		'<ul class="tabs2">' +
 			'<li class="selected" style="margin-left: 0px;"><a href="#" id="ShowRecentGames" class="StatsTab">Recent</a></li>' +
 			'<li><a href="#" id="ShowRankedGames"class="StatsTab">Ranked</a></li>' +
 		'</ul>' +
-		'<div class="tabs2_container pane">' + 
-			'<div id="RecentGames" class="StatsPage">' + 
+		'<div class="tabs2_container pane" style="text-align:left;">' + 
+			'<div id="RecentGames" class="StatsPage" style="padding-left:10px; padding-bottom:3px;">' + 
+				"Games: " + $matches.length + "<br/>" +
 				"Score: " + totalDominanceFactor + "<br/>" +
 				"Average: " + Math.round(averageDominanceFactor*100)/100 + "<br/>" +
 				"Lowest: " + lowestDominanceFactor + "<br/>" +
 				"Highest: " + highestDominanceFactor + "<br/>" +
 			'</div>' +
-			'<div id="RankedGames" class="StatsPage" style="display: none">' +
-				"Ranked Games: " + totalRankedGames + "<br/>" +
+			'<div id="RankedGames" class="StatsPage" style="display: none; padding-left:10px; padding-bottom:3px;">' +
+				"Ranked Games: " + totalRankedMatches + "<br/>" +
 				"Ranked Score: " + rankedTotalDominanceFactor + "<br/>" +
 				"Ranked Average: " + Math.round(rankedAverageDominanceFactor*100)/100 + "<br/>" +
-				"Ranked Best Character: " + rankedBestCharacter + " (" + rankedBestCharacterAverageDominanceFactor + ")<br/>" +
-				"Ranked Worst Character: " + rankedWorstCharacter + " (" + rankedWorstCharacterAverageDominanceFactor + ")<br/>" +
+				"Ranked Best: " + rankedBestCharacter + " (" + rankedBestCharacterAverageDominanceFactor + ")<br/>" +
+				"Ranked Worst: " + rankedWorstCharacter + " (" + rankedWorstCharacterAverageDominanceFactor + ")<br/>" +
 			'</div>' +
 		'</div>'
 		);
