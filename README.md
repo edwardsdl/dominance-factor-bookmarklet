@@ -1,3 +1,5 @@
+**This repository is no longer in active development, but feel free to submit pull requests.**
+
 #Dominance Factor Bookmarklet
 A bookmarklet which calculates your League of Legends dominance factor based on your last 10 games
 
